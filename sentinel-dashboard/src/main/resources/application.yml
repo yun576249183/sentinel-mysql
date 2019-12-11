@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+#spring settings
+spring:
+  application:
+    name: sentinel-dashboard
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: false
+    show-sql: false
+
+#auth settings
+auth:
+  filter:
+    exclude-url-suffixes: htm,html,js,css,map,ico,ttf,woff,png
+    exclude-urls: /,/auth/login,/auth/logout,/registry/machine,/version
+  # If auth.enabled=false, Sentinel console disable login
+  password: sentinel
+  username: sentinel
+
+#logging settings
+logging:
+  file: ${user.home}/logs/csp/sentinel-dashboard.log
+  level:
+    org:
+      springframework:
+        web: INFO
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sentinel?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 576249183~#Z
+
